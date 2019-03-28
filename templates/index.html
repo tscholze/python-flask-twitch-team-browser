@@ -1,0 +1,17 @@
+{% extends "layout.html" %} {% block content %}
+<h1>Browse Twitch team</h1>
+<div class="content">
+    <h2>1. Specify your team</h2>
+    <p>Enter the team's name that you will browse.</p>
+    <form method="post">
+        <input type="text" placeholder="Enter team name"/> Include mature content? <input type="checkbox"/>
+        <button>search</button>
+    </form>
+</div>
+
+{% if results %}
+<div class="content">
+    <h2>2. Browse</h2>
+</div>
+{% endif %}
+{% endblock %}
