@@ -14,22 +14,13 @@
 
 <body class="ms-Fabric" dir="ltr">
 
-    <header>
-        <ul>
-            <li><a href="#">Browse</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contact</a></li>
-            <li style="float:right"><a class="active" href="#about"><strong>Fork on GitHub</strong></a></li>
-        </ul>
-    </header>
+    {% include '_header.html' %}
 
     <div id="content-wrapper">
         {% block content %}{% endblock %}
     </div>
-
-    <footer>
-        <p>Powered by Twitch Team Browser | Python Flask | Microsoft Office Fabric and <3</p>
-    </footer>
 </body>
+
+{% include '_footer.html' %}
 
 </html>

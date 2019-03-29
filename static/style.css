@@ -39,15 +39,14 @@ li a:hover {
 
 .content {
     padding: 8px;
-    margin: 0 auto;
     margin-bottom: 20px;
     background-color: white;
     border: 1px solid #c8c8c8;
-    max-width: 720px;
 }
 
 #content-wrapper {
-    margin: 32px;
+    max-width: 720px;
+    margin: 0 auto;
 }
 
 footer {
