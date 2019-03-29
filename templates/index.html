@@ -4,7 +4,7 @@
     <h2>1. Specify your team</h2>
     <p>Enter the team's name that you will browse.</p>
     <form method="post">
-        <input type="text" placeholder="Enter team name"/> Include mature content? <input type="checkbox"/>
+        <input type="text" placeholder="Enter team name" name="team_name"/> Include mature content? <input type="checkbox" name="include_mature" value="yes"/>
         <button>search</button>
     </form>
 </div>
@@ -12,6 +12,25 @@
 {% if results %}
 <div class="content">
     <h2>2. Browse</h2>
+
+    <table>
+        <th>&nbsp;</th><th text-align="left">Name</th><th>Is family friendly?</th>
+        {% for result in results %}
+            <tr>
+                <td><img src="{{ result.logo }}" width="100" /></td>
+                <td>
+                    <a href="{{ result.url }}" target="_blank">{{ result.display_name}}</a>
+                </td>
+                <td text-align="center">
+                    {% if result.mature %}
+                        🚨
+                    {% else%}
+                        ✅
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 {% endif %}
 {% endblock %}
