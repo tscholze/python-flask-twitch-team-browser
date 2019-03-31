@@ -4,8 +4,8 @@
     <h2>1. Specify your team</h2>
     <p>Enter the team's name that you will browse.</p>
     <form method="post">
-        <input type="text" placeholder="Enter team name" name="team_name" value="{{ team_name }}"/> Include mature content?
-        <input type="checkbox" name="include_mature" value="checked" {% if include_mature %}} checked="checked" {% endif %}/>
+        <input type="text" placeholder="Enter team name" name="team_name" value="{{ team_name }}"/> <label for="include_mature">Include mature content?</label>
+        <input type="checkbox" name="include_mature" value="checked" {% if include_mature %}} checked="checked" {% endif %}/> <br />
         <button>search</button>
     </form>
 </div>
@@ -14,15 +14,18 @@
 <div class="content">
     <h2>2. Browse</h2>
 
-    <table>
-        <th>&nbsp;</th><th text-align="left">Name</th><th>Is family friendly?</th>
+    <table class="altered-backgrounds">
+        <th>&nbsp;</th><th text-align="left">Name</th><th>Status</th><th>Family friendly?</th>
         {% for result in results %}
             <tr>
                 <td><img src="{{ result.logo }}" width="100" /></td>
-                <td>
+                <td class="ms-textAlignCenter">
                     <a href="{{ result.url }}" target="_blank">{{ result.display_name}}</a>
                 </td>
-                <td text-align="center">
+                <td>
+                    {{ result.status }}
+                </td>
+                <td class="ms-textAlignCenter">
                     {% if result.mature %}
                         🚨
                     {% else%}

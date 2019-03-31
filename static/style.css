@@ -1,3 +1,7 @@
+/**
+* Colors: https://developer.microsoft.com/en-us/fabric#/styles/colors
+*/
+
 body {
     margin: 0;
     padding: 0;
@@ -31,6 +35,20 @@ li a {
 
 li a:hover {
     background-color: #111;
+}
+
+button {
+    background-color: #f8f8f8;
+    border: 1px solid #666666;
+    margin: 3px;
+}
+
+.altered-backgrounds tr:nth-child(even) {
+    background-color: clear;
+}
+
+.altered-backgrounds tr:nth-child(odd) {
+    background-color: #f8f8f8;
 }
 
 .active {
