@@ -24,13 +24,26 @@ def index():
         return render_template("index.html")
 
 def get_team_members(team_name, include_mature):
+    # Configurate request header
     headers = {
         'Accept': 'application/vnd.twitchtv.v5+json',
         'Client-ID': configuration.TWITCH_CLIENT_ID 
     }
-    url = configuration.TWITCH_TEAMS_BASE_ENDPOINT_URL + "/" + team_name
-    members = requests.get(url, headers=headers).json()["users"]
 
+    # Build url with entered team name
+    # TODO: Encode team name to http save chars.
+    url = configuration.TWITCH_TEAMS_BASE_ENDPOINT_URL + "/" + team_name
+
+    # Send request and try to parse response as json.
+    response = requests.get(url, headers=headers).json()
+    
+    # Check if entered team name responded any members.
+    if "users" in response:
+        members = response["users"]
+    else:
+        members = []
+
+    # Check if mature members should be included.
     if include_mature == False:
         members = filter(lambda member: member["mature"] == False, members)
 
