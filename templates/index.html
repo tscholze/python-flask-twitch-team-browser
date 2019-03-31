@@ -4,7 +4,8 @@
     <h2>1. Specify your team</h2>
     <p>Enter the team's name that you will browse.</p>
     <form method="post">
-        <input type="text" placeholder="Enter team name" name="team_name"/> Include mature content? <input type="checkbox" name="include_mature" value="yes"/>
+        <input type="text" placeholder="Enter team name" name="team_name" value="{{ team_name }}"/> Include mature content?
+        <input type="checkbox" name="include_mature" value="checked" {% if include_mature %}} checked="checked" {% endif %}/>
         <button>search</button>
     </form>
 </div>

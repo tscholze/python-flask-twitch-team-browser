@@ -19,7 +19,7 @@ def index():
             return "Error"
 
         # Return template with requested results.
-        return render_template("index.html", results=get_team_members(team_name, include_mature))
+        return render_template("index.html",team_name=team_name, include_mature=include_mature, results=get_team_members(team_name, include_mature))
     else:
         return render_template("index.html")
 
