@@ -10,7 +10,7 @@ def index():
     # If request is Post, request data from server.
     if request.method == "POST":
         # Get information from POST request.
-        team_name = request.form.get("team_name")
+        team_name = request.form.get("team_name").lower()
         include_mature = True if request.form.get("include_mature") else False
 
         # Team name has to be set, otherwise return default page.
@@ -36,8 +36,6 @@ def get_team_by_name(team_name, include_mature):
 
     # Send request and try to parse response as json.
     response = requests.get(url, headers=headers).json()
-
-    print(response)
 
     # Check if mature members should be included.
     if include_mature == False:
