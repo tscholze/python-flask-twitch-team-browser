@@ -19,11 +19,11 @@ def index():
             return "Error"
 
         # Return template with requested results.
-        return render_template("index.html",team_name=team_name, include_mature=include_mature, results=get_team_members(team_name, include_mature))
+        return render_template("index.html",team_name=team_name, include_mature=include_mature, team=get_team_by_name(team_name, include_mature))
     else:
         return render_template("index.html")
 
-def get_team_members(team_name, include_mature):
+def get_team_by_name(team_name, include_mature):
     # Configurate request header
     headers = {
         'Accept': 'application/vnd.twitchtv.v5+json',
@@ -36,18 +36,14 @@ def get_team_members(team_name, include_mature):
 
     # Send request and try to parse response as json.
     response = requests.get(url, headers=headers).json()
-    
-    # Check if entered team name responded any members.
-    if "users" in response:
-        members = response["users"]
-    else:
-        members = []
+
+    print(response)
 
     # Check if mature members should be included.
     if include_mature == False:
-        members = filter(lambda member: member["mature"] == False, members)
+        response["users"] = filter(lambda member: member["mature"] == False, response["users"])
 
-    return members
+    return response
 
 
 if __name__ == "__main__":

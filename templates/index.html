@@ -7,33 +7,45 @@
         <input type="text" placeholder="Enter team name" name="team_name" value="{{ team_name }}"/> <label for="include_mature">Include mature content?</label>
         <input type="checkbox" name="include_mature" value="checked" {% if include_mature %}} checked="checked" {% endif %}/> <br />
         <button>search</button>
+
+        {% if team["error"] %}
+            <p class="error">The given name does not match any team on Twitch.</p>
+        {% endif %}
     </form>
 </div>
 
-{% if results %}
+{% if team["name"] %}
 <div class="content">
     <h2>2. Browse</h2>
 
-    <table class="altered-backgrounds">
-        <th>&nbsp;</th><th text-align="left">Name</th><th>Status</th><th>Family friendly?</th>
-        {% for result in results %}
+    {{ team["name"]}}
+
+    <table class="altered-backgrounds" style="width: 100%;">
+        <th>&nbsp;</th><th text-align="left">Name</th><th>Status</th><th style="width: 125px;;">Family friendly?</th>
+        {% if team["users"] %}
+            {% for member in team["users"] %}
+                <tr>
+                    <td><img src="{{ member.logo }}" width="100" /></td>
+                    <td class="ms-textAlignCenter">
+                        <a href="{{ member.url }}" target="_blank">{{ member.display_name}}</a>
+                    </td>
+                    <td>
+                        {{ member.status }}
+                    </td>
+                    <td class="ms-textAlignCenter" >
+                        {% if member.mature %}
+                            🚨
+                        {% else%}
+                            ✅
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
             <tr>
-                <td><img src="{{ result.logo }}" width="100" /></td>
-                <td class="ms-textAlignCenter">
-                    <a href="{{ result.url }}" target="_blank">{{ result.display_name}}</a>
-                </td>
-                <td>
-                    {{ result.status }}
-                </td>
-                <td class="ms-textAlignCenter">
-                    {% if result.mature %}
-                        🚨
-                    {% else%}
-                        ✅
-                    {% endif %}
-                </td>
+                <td colspan="4" style="text-align: center;"><i>The team has no members, yet.</i></td>
             </tr>
-        {% endfor %}
+        {% endif %}
     </table>
 </div>
 {% endif %}
