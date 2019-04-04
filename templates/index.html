@@ -44,7 +44,7 @@
         {% if team["users"] %}
             {% for member in team["users"] %}
                 <tr>
-                    <td><img src="{{ member.logo }}" width="100" /></td>
+                    <td><img src="{{ member.logo }}" width="100" title="ID: {{ member._id }}"/></td>
                     <td class="ms-textAlignCenter">
                         <a href="{{ member.url }}" target="_blank">{{ member.display_name}}</a>
                     </td>
