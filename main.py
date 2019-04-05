@@ -41,7 +41,45 @@ def get_team_by_name(team_name, include_mature):
     if include_mature == False:
         response["users"] = filter(lambda member: member["mature"] == False, response["users"])
 
+    # Enrich online information to response
+    response = get_online_status_of_team_members(response)
+
+    # Sort by online status
+    response["users"].sort(key=lambda member: member["is_online"], reverse=True)
+
     return response
+
+def get_online_status_of_team_members(team_response):
+    # Configurate request header
+    headers = {
+        'Accept': 'application/vnd.twitchtv.v5+json',
+        'Client-ID': configuration.TWITCH_CLIENT_ID 
+    }
+
+    parameter = "?"
+
+    for member in team_response["users"]:
+        parameter = parameter + f"user_id={member['_id']}&"
+
+    url = configuration.TWITCH_STREAMS_BASE_ENDPOINT_URL + parameter
+    response = requests.get(url, headers=headers).json()
+    online_member_ids = list(map(lambda member: member["user_id"], response["data"]))
+
+    print(online_member_ids)
+
+    updated_member = []
+    for member in team_response["users"]:
+
+        if member["_id"] in online_member_ids:
+            member["is_online"] = True
+        else:
+            member["is_online"] = False
+
+        updated_member.append(member)
+    
+    team_response["users"] = updated_member
+
+    return team_response
 
 
 if __name__ == "__main__":

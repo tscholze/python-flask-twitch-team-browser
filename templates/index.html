@@ -46,6 +46,9 @@
                 <tr>
                     <td><img src="{{ member.logo }}" width="100" title="ID: {{ member._id }}"/></td>
                     <td class="ms-textAlignCenter">
+                        {% if member["is_online"] %}
+                        <span title="Is currently streaming">🔴</span>&nbsp;
+                        {% endif %}
                         <a href="{{ member.url }}" target="_blank">{{ member.display_name}}</a>
                     </td>
                     <td>
