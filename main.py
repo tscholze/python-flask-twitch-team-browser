@@ -59,6 +59,10 @@ def get_team_by_name(team_name, include_mature):
     # Send request and try to parse response as json.
     response = requests.get(url, headers=POST_HEADER).json()
 
+    # If response contains no users, return.
+    if "users" not in response:
+        return response
+
     # Check if mature members should be included.
     if include_mature == False:
         response["users"] = list(
