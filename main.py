@@ -14,14 +14,14 @@ def index():
         include_mature = True if request.form.get("include_mature") else False
 
         # Team name has to be set, otherwise return default page.
-        if team_name is None:
-            # TODO: Return error string to inform the user
-            return "Error"
-
+        if team_name is None or team_name is "":
+            return render_template("index.html", team=None)
+            
         # Return template with requested results.
         return render_template("index.html",team_name=team_name, include_mature=include_mature, team=get_team_by_name(team_name, include_mature))
     else:
-        return render_template("index.html")
+        return render_template("index.html", team=None)
+
 
 def get_team_by_name(team_name, include_mature):
     # Configurate request header
@@ -39,7 +39,7 @@ def get_team_by_name(team_name, include_mature):
 
     # Check if mature members should be included.
     if include_mature == False:
-        response["users"] = filter(lambda member: member["mature"] == False, response["users"])
+        response["users"] = list(filter(lambda member: member["mature"] == False, response["users"]))
 
     # Enrich online information to response
     response = get_online_status_of_team_members(response)
@@ -57,15 +57,12 @@ def get_online_status_of_team_members(team_response):
     }
 
     parameter = "?"
-
     for member in team_response["users"]:
         parameter = parameter + f"user_id={member['_id']}&"
 
     url = configuration.TWITCH_STREAMS_BASE_ENDPOINT_URL + parameter
     response = requests.get(url, headers=headers).json()
     online_member_ids = list(map(lambda member: member["user_id"], response["data"]))
-
-    print(online_member_ids)
 
     updated_member = []
     for member in team_response["users"]:
