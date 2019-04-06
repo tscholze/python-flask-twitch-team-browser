@@ -5,7 +5,8 @@ from flask import Flask, render_template, request
 from urllib.parse import quote
 import requests
 
-# POST http header
+# POST http header.
+# Edit or change key.
 POST_HEADER = {
     'Accept': 'application/vnd.twitchtv.v5+json',
     'Client-ID': "tfs0skg1ggojjik59kfv7rnqs3myq7"

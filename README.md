@@ -15,7 +15,7 @@
 
 ## Configuration
 
-Open `configuration.py` and fill in the required values for the properties `TWITCH_CLIENT_ID` and `TWITCH_TEAMS_NAME`.
+Open `main.py` and fill in the required `TWITCH_CLIENT_ID` constant with Twitch API client id.
 To change the templates, have a look at the folder `templates/`.
 
 ## Run
@@ -31,6 +31,9 @@ To change the templates, have a look at the folder `templates/`.
  * Restarting with stat
  * Debugger is active!
 ```
+
+![Screenshot](https://tscholze.uber.space/wp-content/uploads/2019/04/Bildschirmfoto-2019-04-06-um-09.08.08-768x937.png)
+
 
 ## Contributing
 
