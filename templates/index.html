@@ -17,7 +17,6 @@
 {% if team["name"] %}
 <div class="content">
     <h2>Team Information</h2>
-
     <table>
         <tr>
             <td>
@@ -38,8 +37,13 @@
 </div>
     
 <div class="content">
-    <h2>Member Information</h2>
-    <table class="altered-backgrounds" style="width: 100%; padding-top: 8px;">
+    <h2>
+        Member Information
+        {% if team["users"] %}
+        ({{ team["users"] | length}})
+        {% endif %}
+    </h2>
+    <table class="altered-backgrounds">
         <th>&nbsp;</th><th text-align="left">Name</th><th>Status</th><th style="width: 125px;">Family friendly?</th>
         {% if team["users"] %}
             {% for member in team["users"] %}
@@ -54,18 +58,18 @@
                     <td>
                         {{ member.status }}
                     </td>
-                    <td class="ms-textAlignCenter" >
+                    <td class="ms-textAlignCenter">
                         {% if member.mature %}
-                            🚨
+                            <span title="Stream/er is tagged as mature">🚨</span>
                         {% else%}
-                            ✅
+                            <span title="Stream/er is not tagged as mature">✅</span>
                         {% endif %}
                     </td>
                 </tr>
             {% endfor %}
         {% else %}
             <tr>
-                <td colspan="4" style="text-align: center;"><i>The team has no members, yet.</i></td>
+                <td colspan="4" class="ms-textAlignCenter"><i>The team has no members, yet.</i></td>
             </tr>
         {% endif %}
     </table>
