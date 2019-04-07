@@ -6,10 +6,10 @@ from urllib.parse import quote
 import requests
 
 # POST http header.
-# Edit or change key.
+# (https://dev.twitch.tv/console/apps)
 POST_HEADER = {
     'Accept': 'application/vnd.twitchtv.v5+json',
-    'Client-ID': "tfs0skg1ggojjik59kfv7rnqs3myq7"
+    'Client-ID': "<CLIENT_ID>"
 }
 
 # Webapp's root object.
@@ -109,7 +109,6 @@ def get_online_status_of_team_members(team_response):
     # in the responded online id list. Set True or False to the
     # `is_online` prorperty.``
     for member in team_response["users"]:
-
         if member["_id"] in online_member_ids:
             member["is_online"] = True
         else:
