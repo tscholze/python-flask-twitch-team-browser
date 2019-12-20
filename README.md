@@ -34,6 +34,9 @@ To change the templates, have a look at the folder `templates/`.
 
 ![Screenshot](https://tscholze.uber.space/wp-content/uploads/2019/04/Bildschirmfoto-2019-04-06-um-09.08.08-768x937.png)
 
+## Publications
+- Personal Blog: [[Python & Flask] Twitch Teams Browser](https://tscholze.uber.space/2019/04/06/python-flask-twitch-teams-browser/)
+
 
 ## Contributing
 
